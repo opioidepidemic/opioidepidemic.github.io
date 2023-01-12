@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Opioids</title>
+  <link rel="stylesheet" href="../dist/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script type="text/javascript">
+    const createTable = () => {
+      const table = $("#table-body")
+      table.html('');
+      const baseDose = +$("#dose").val();
+      if (!(baseDose > 0.001)) return;
+      const interval = $("#interval").val();
+      const rate = +$("#rate").val();
+
+      let i = 0;
+      let dose = baseDose // cope
+      for (dose; dose >= (baseDose * .2); dose *= (1 - (rate / 100))) {
+        table.append(`<tr><td>${interval} ${++i}</td><td>${dose.toFixed(2)}</td></tr>`);
+      }
+      table.append(`<tr><td>${interval} ${++i}</td><td>${dose.toFixed(2)}</td></tr>`); // cope
+      table.append(`<tr><td>${interval} ${++i}</td><td>0.00</td></tr>`);
+    }
+  </script>
+</head>
+
+<body class="bg-zinc-700">
+  <nav class="flex border-orange-300 border-b-2 list-none">
+    <li class="mr-1">
+      <a href="./index.html"
+        class="bg-zinc-700 inline-block py-2 px-4 text-gray-300 hover:text-orange-200 font-semibold">The
+        Opioid Epidemic</a>
+    </li>
+    <li class="mr-1">
+      <a href="./2.html" class="bg-zinc-700 inline-block py-2 px-4 text-gray-300 hover:text-orange-200 font-semibold">
+        What
+        you can do</a>
+    </li>
+    <li class="-mb-1 mr-1">
+      <a href="#"
+        class="bg-zinc-700 border-orange-300 inline-block border-l-2 border-t-2 border-r-2 rounded-t py-2 px-4 text-white font-semibold">Taper
+        Calculator</a>
+    </li>
+    <li class="-mb-px mr-1 block ml-auto">
+      <a href="./sources.html"
+        class="bg-zinc-700 inline-block py-2 px-4 text-white hover:text-orange-200 underline">Sources</a>
+    </li>
+  </nav>
+
+  <main class="p-6 font-mono">
+    <h3 class="text-gray-300 text-center text-2xl">Always consult your doctor to learn what is best in your situation
+      <!-- <h1 class="text-center text-4xl text-orange-500 font-semibold mb-12">Always consult a doctor to learn what is best
+      for your situation
+    </h1> -->
+
+      <div class="text-white text-2xl mb-8 flex justify-evenly items-center">
+        <label for="dose">Current Dosage (mg)</label>
+        <input type="number"
+          class="text-2xl w-32 py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+          id="dose" value="10">
+
+        </input>
+
+        <label for="interval">Taper Interval</label>
+        <select id="interval"
+          class="text-2xl w-auto py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+
+          <option selected value="Week">Weekly</option>
+          <option value="Month">Monthly</option>
+        </select>
+
+        <label for="rate">Taper Rate</label>
+        <select id="rate"
+          class="text-2xl w-auto py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+
+          <option value="5">5%</option>
+          <option value="10">10%</option>
+          <option selected value="15">15%</option>
+          <option value="20">20%</option>
+          <option value="20">25%</option>
+        </select>
+
+        <button class="bg-zinc-800 p-4 rounded-lg" onclick="createTable();">
+          Calculate
+        </button>
+      </div>
+    </h3>
+    <table class="mt-12 font-serif text-4xl text-white table-fixed w-full">
+      <thead class="border-b">
+        <td>Period</td>
+        <td>Dosage</td>
+      </thead>
+      <tbody id="table-body">
+
+      </tbody>
+    </table>
+  </main>
+
+</body>
+
+</html>

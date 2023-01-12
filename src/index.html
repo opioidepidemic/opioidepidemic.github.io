@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Opioids</title>
+  <link rel="stylesheet" href="../dist/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script type="text/javascript">
+    let abuseCount = 0;
+    const ABUSE_MS = 1000 / ((2_791 * 1_000) / 30 / 24 / 60 / 60);
+
+    const stats = {
+      total: 81_231,
+      non: 64_441,
+      prescription: 16_790,
+    };
+    const dividers = {
+      year: 1, month: 12, day: 365, hour: 365 * 24
+    };
+    const formatNumber = (number) => {
+      const length = Math.floor(Math.log10(number)) + 1;
+      if (length < 2) return number.toPrecision(2);
+      else return number.toString().slice(0, 2).padEnd(length, '0');
+    }
+    const getNumber = () => {
+      const period = $("#period").val();
+      const cause = $("#cause").val();
+      return stats[cause] / dividers[period];
+    }
+    const clamp = (value, min, max) => Math.min(max, Math.max(value, min))
+
+    const updateNumber = () => {
+      const number = getNumber();
+      $("#number").text(formatNumber(number));
+      $("#skull").text("💀".repeat(Math.round(number)));
+      $("#skull").css({ 'font-size': clamp(Math.sqrt(841 / number), 0.25, 8) + 'rem' })
+    }
+
+    window.onload = () => {
+      updateNumber();
+      setInterval(() => $("#abuse").text(++abuseCount), ABUSE_MS)
+    }
+  </script>
+</head>
+
+<body class="bg-zinc-700">
+  <nav class="flex border-orange-300 border-b-2 list-none">
+    <li class="-mb-1 mr-1">
+      <a href="#"
+        class="bg-zinc-700 border-orange-300 inline-block border-l-2 border-t-2 border-r-2 rounded-t py-2 px-4 text-white font-semibold">The
+        Opioid Epidemic</a>
+    </li>
+    <li class="mr-1">
+      <a href="./2.html" class="bg-zinc-700 inline-block py-2 px-4 text-gray-300 hover:text-orange-200 font-semibold">
+        What
+        you can do</a>
+    </li>
+    <li class="mr-1">
+      <a href="./3.html"
+        class="bg-zinc-700 inline-block py-2 px-4 text-gray-300 hover:text-orange-200 font-semibold">Taper
+        Calculator</a>
+    </li>
+    <li class=" mr-1 block ml-auto">
+      <a href="./sources.html"
+        class="bg-zinc-700 inline-block py-2 px-4 text-white hover:text-orange-200 underline">Sources</a>
+    </li>
+  </nav>
+
+  <main class="text-white text-center py-6 px-4 font-mono">
+    <h1 class="text-6xl decoration-orange-300 underline font-semibold">The Opioid Epidemic</h1>
+
+    <div class="my-16 text-2xl">
+      <span id="number" class="text-9xl">81000</span>
+      <span>people have died in the past</span>
+
+      <select id="period"
+        class="inline-block text-2xl w-auto py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+        style="padding-right: 3rem;" onchange="updateNumber();">
+
+        <option value="year">year</option>
+        <option selected value="month">month</option>
+        <option value="day">day</option>
+        <option value="hour">hour</option>
+      </select>
+
+      <span>due to</span>
+
+      <select id="cause"
+        class="inline-block text-2xl py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+        style="padding-right: 3rem;" onchange="updateNumber();">
+        <option selected value="total">an opioid overdose</option>
+        <option value="non">a non-prescription opioid overdose</option>
+        <option value="prescription">a prescription opioid overdose</option>
+      </select>
+    </div>
+
+    <div style="font-size: 0.25rem;" id="skull">
+      💀💀💀💀💀💀
+    </div>
+
+    <footer class="fixed bottom-0 right-0 p-4 rounded-tl-xl bg-zinc-800 text-white font-mono">
+      <span class="text-orange-300 text-2xl" id="abuse">0</span> people have misused opioids since you opened this page
+    </footer>
+  </main>
+</body>
+
+</html>
