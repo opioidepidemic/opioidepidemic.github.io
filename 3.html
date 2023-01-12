@@ -49,42 +49,49 @@
   </nav>
 
   <main class="p-6 font-mono">
-    <h3 class="text-gray-300 text-center text-2xl">Always consult your doctor to learn what is best in your situation
-      <!-- <h1 class="text-center text-4xl text-orange-500 font-semibold mb-12">Always consult a doctor to learn what is best
+    <h1 class="text-white text-center text-6xl decoration-orange-300 underline font-semibold mb-8">Opioid Tapering
+      Calcuator
+    </h1>
+
+    <h3 class="text-gray-300 text-center text-xl mb-12">
+      Tapering helps reudce opioid usage without experiencing withdrawl<br>
+      <b class="text-white">Always consult your doctor to learn what is best in your situation</b>
+    </h3>
+    <!-- <h1 class="text-center text-4xl text-orange-500 font-semibold mb-12">Always consult a doctor to learn what is best
       for your situation
     </h1> -->
 
-      <div class="text-white text-2xl mb-8 flex justify-evenly items-center">
-        <label for="dose">Current Dosage (mg)</label>
-        <input type="number"
-          class="text-2xl w-32 py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-          id="dose" value="10">
+    <div class="text-white text-2xl mb-8 flex justify-evenly items-center">
+      <label for="dose">Current Dosage (mg)</label>
+      <input type="number"
+        class="text-2xl w-32 py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+        id="dose" value="10">
 
-        </input>
+      </input>
 
-        <label for="interval">Taper Interval</label>
-        <select id="interval"
-          class="text-2xl w-auto py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+      <label for="interval">Taper Interval</label>
+      <select id="interval"
+        class="text-2xl w-auto py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
 
-          <option selected value="Week">Weekly</option>
-          <option value="Month">Monthly</option>
-        </select>
+        <option selected value="Week">Weekly</option>
+        <option value="Month">Monthly</option>
+      </select>
 
-        <label for="rate">Taper Rate</label>
-        <select id="rate"
-          class="text-2xl w-auto py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+      <label for="rate">Taper Rate</label>
+      <select id="rate"
+        class="text-2xl w-auto py-2.5 bg-zinc-700 border-0 border-b-2 appearance-none border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
 
-          <option value="5">5%</option>
-          <option value="10">10%</option>
-          <option selected value="15">15%</option>
-          <option value="20">20%</option>
-          <option value="20">25%</option>
-        </select>
+        <option value="5">5%</option>
+        <option value="10">10%</option>
+        <option selected value="15">15%</option>
+        <option value="20">20%</option>
+        <option value="20">25%</option>
+      </select>
 
-        <button class="bg-zinc-800 p-4 rounded-lg" onclick="createTable();">
-          Calculate
-        </button>
-      </div>
+      <button class="bg-zinc-800 p-4 rounded-lg" onclick="createTable();">
+        Calculate
+      </button>
+    </div>
     </h3>
     <table class="mt-12 font-serif text-4xl text-white table-fixed w-full">
       <thead class="border-b">
